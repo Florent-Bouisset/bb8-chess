@@ -18,7 +18,7 @@ class UCIEngine(BaseEngine):
             self.log("in", line)
 
             if line == "uci":
-                self._respond("id name R2D2")
+                self._respond("id name BB-8")
                 self._respond("id author Florent Bouisset")
                 self._respond("uciok")
 
