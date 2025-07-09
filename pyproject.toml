@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "bb8_chess"
+version = "0.1.0"
+description = "My own made chess engine"
+authors = ["Florent Bouisset <florent.bouisset@gmail.com>"]
+packages = [
+    { include = "engine" },
+    { include = "scripts" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.14"
+chess = "^1.11.2"
+
+[tool.poetry.dev-dependencies]
+watchdog = "^6.0.0"
+pyinstaller = "^6.14.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+dev = "scripts.dev:run"
+build_binary = "scripts.build_binary:run"

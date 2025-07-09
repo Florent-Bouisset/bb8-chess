@@ -1,3 +1,2 @@
 chess==1.11.2
-python-chess==1.999
 watchdog==6.0.0
