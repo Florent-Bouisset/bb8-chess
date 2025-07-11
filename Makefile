@@ -1,8 +1,12 @@
 # Makefile
 
 # Run the engine in development mode
-dev:
-	poetry run python main.py
+dev-random:
+	poetry run python main.py random
+
+# Run the engine in development mode
+dev-smart:
+	poetry run python main.py smart
 
 # Build the smart engine as binary
 build-smart:

@@ -1,11 +1,13 @@
 import chess
-import random
 from engine.base_engine import BaseEngine
+from .move_selector import select_best_move
+from .position_evaluator import evaluate_position
+from engine.logger import log
 
 
 class SmartEngine(BaseEngine):
-    def __init__(self, debug=True, log_path=None):
-        super().__init__(debug, log_path)
+    def __init__(self, debug=True):
+        super().__init__(debug)
         self.board = chess.Board()
 
     def run(self):
@@ -15,7 +17,7 @@ class SmartEngine(BaseEngine):
             except EOFError:
                 break
 
-            self.log("in", line)
+            log("in", line)
 
             if line == "uci":
                 self._respond("id name BB-8 smart-Engine")
@@ -62,18 +64,16 @@ class SmartEngine(BaseEngine):
         if not legal_moves:
             return "0000", None  # No legal move
 
-        # Pick a "best" move — currently random
-        move = random.choice(legal_moves)
+        [move, score] = select_best_move(self.board, evaluate_position)
         move_uci = move.uci()
 
         # Apply the move temporarily
         self.board.push(move)
 
-        # Predict opponent's reply — also randomly for now
-        opponent_moves = list(self.board.legal_moves)
+        # Predict opponent's reply
+        [ponder, evaluation] = select_best_move(self.board, evaluate_position)
         ponder_move_uci = None
-        if opponent_moves:
-            ponder = random.choice(opponent_moves)
+        if ponder:
             ponder_move_uci = ponder.uci()
 
         # Undo the temporary move

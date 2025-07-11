@@ -1,2 +1,2 @@
 from .random_engine import RandomEngine
-from .smart_engine import SmartEngine
+from .smart_engine.engine import SmartEngine

@@ -1,6 +1,7 @@
 import chess
 import random
 from engine.base_engine import BaseEngine
+from engine.logger import log
 
 
 class RandomEngine(BaseEngine):
@@ -15,7 +16,7 @@ class RandomEngine(BaseEngine):
             except EOFError:
                 break
 
-            self.log("in", line)
+            log("in", line)
 
             if line == "uci":
                 self._respond("id name BB-8 - randomEngine")
