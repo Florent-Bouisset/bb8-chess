@@ -1,10 +1,22 @@
-from engine import UCIEngine
+from engine import RandomEngine
+from engine import SmartEngine
+
 import sys
 import traceback
 
 
-def main():
-    engine = UCIEngine()
+def get_engine(name: str):
+    if name == "random":
+        return RandomEngine()
+    elif name == "smart":
+        return SmartEngine()
+    else:
+        raise ValueError(f"Unknown engine: {name}")
+
+
+def main(args=sys.argv):
+    engine_name = sys.argv[1] if len(sys.argv) > 1 else "random"
+    engine = get_engine(engine_name)
     try:
         engine.run()
     except Exception as e:

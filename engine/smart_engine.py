@@ -3,7 +3,7 @@ import random
 from engine.base_engine import BaseEngine
 
 
-class UCIEngine(BaseEngine):
+class SmartEngine(BaseEngine):
     def __init__(self, debug=True, log_path=None):
         super().__init__(debug, log_path)
         self.board = chess.Board()
@@ -18,7 +18,7 @@ class UCIEngine(BaseEngine):
             self.log("in", line)
 
             if line == "uci":
-                self._respond("id name BB-8")
+                self._respond("id name BB-8 smart-Engine")
                 self._respond("id author Florent Bouisset")
                 self._respond("uciok")
 
