@@ -19,12 +19,11 @@ def select_best_move(
     best_score = float("-inf")
     best_moves = []
 
-    # Determine who's turn it is
-    current_color = board.turn
-
     for move in board.legal_moves:
         board.push(move)  # Make the move on the board
-        score = evaluate_position(board, current_color)  # Evaluate new position
+        # Evaluate new position from current player (i.e opponent turn), so negate it
+        score = -evaluate_position(board)
+        log("DEBUG", f"move {move.uci()}, evaluation: {score}")
         board.pop()  # Undo move
 
         if score > best_score:
@@ -32,8 +31,5 @@ def select_best_move(
             best_moves = [move]
         elif score == best_score:
             best_moves.append(move)
-
-    # logger.info("Evaluating position...")
-    # logger.warning("No legal moves available.")
 
     return [random.choice(best_moves) if best_moves else None, best_score]

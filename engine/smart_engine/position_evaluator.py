@@ -1,19 +1,20 @@
 import chess
 
+from engine.logger import log
 
-def evaluate_position(board: chess.Board, color: chess.Color) -> float:
+
+def evaluate_position(board: chess.Board) -> float:
     """
     Evaluates the given chess board position and returns a numerical score
-    representing the advantage for White or Black.
+    representing the advantage for current player.
 
-    The score is positive if the position favors White, negative if it favors Black.
+    The score is positive if the position favors current player, negative if it favors opponent.
 
     The evaluation is based on counting material balance and other heuristics
     such as pawn structure (e.g., penalties for doubled pawns).
 
     Parameters:
         board (chess.Board): The current board position to evaluate.
-        color (chess.Color): The perspective from which to evaluate (True for White, False for Black).
 
     Returns:
         float: The evaluation score of the position.
@@ -30,9 +31,17 @@ def evaluate_position(board: chess.Board, color: chess.Color) -> float:
         chess.KING: 0,  # King is not counted
     }
 
+    if board.is_checkmate() == True:
+        log(
+            "DEBUG",
+            "CheckMate possible detected!!",
+        )
+        # Strongly penalize the position if it's checkmate for the current player
+        return -100000
+
     for piece_type in PIECE_VALUES:
         score += len(board.pieces(piece_type, chess.WHITE)) * PIECE_VALUES[piece_type]
         score -= len(board.pieces(piece_type, chess.BLACK)) * PIECE_VALUES[piece_type]
 
     # Flip score if evaluating from Black's perspective
-    return score if color == chess.WHITE else -score
+    return score if board.turn == chess.WHITE else -score
