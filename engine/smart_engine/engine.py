@@ -43,7 +43,6 @@ class SmartEngine(BaseEngine):
 
     def set_position(self, line):
         tokens = line.split()
-
         if "startpos" in tokens:
             self.board.reset()
             moves_index = tokens.index("moves") + 1 if "moves" in tokens else None
@@ -53,6 +52,12 @@ class SmartEngine(BaseEngine):
                     self.board.push_uci(move)
         elif "fen" in tokens:
             self.board.reset()
+
+            fen_index = tokens.index("fen") + 1
+            fen_fields = tokens[fen_index : fen_index + 6]  # les 6 champs FEN
+            fen = " ".join(fen_fields)
+            self.board.set_fen(fen)
+
             moves_index = tokens.index("moves") + 1 if "moves" in tokens else None
             if moves_index:
                 moves = tokens[moves_index:]
