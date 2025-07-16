@@ -32,10 +32,6 @@ def evaluate_position(board: chess.Board) -> float:
     }
 
     if board.is_checkmate() == True:
-        log(
-            "DEBUG",
-            "CheckMate possible detected!!",
-        )
         # Strongly penalize the position if it's checkmate for the current player
         return -100000
 
