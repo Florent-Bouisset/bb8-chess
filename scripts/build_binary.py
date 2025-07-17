@@ -3,7 +3,7 @@ import sys
 
 
 def build_binary(engine_name: str):
-    entry_point = "main.py"
+    entry_point = "run.py"
     output_name = f"bishop_b8_{engine_name}"
 
     # Build command with named binary

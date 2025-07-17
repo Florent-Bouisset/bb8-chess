@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useChess } from "../composables/useChess";
-import { useEngine } from "../composables/useEngine";
+// import { useEngine } from "../composables/useEngine";
 import { useChessground } from "../composables/useChessground";
+import { useCustomEngine } from "../composables/useCustomEngine";
 
 const boardRef = ref<HTMLDivElement | null>(null);
 const { chess, getTurn, movePiece } = useChess();
-const { initEngine, onBestMove, updateEnginePosition } = useEngine();
-const { initChessground, updateBoard } = useChessground();
+// const { initEngine, onBestMove, updateEnginePosition } = useEngine();
+const { initEngine, onBestMove, updateEnginePosition } = useCustomEngine();
 
-onMounted(() => {
-  initEngine();
+const { initChessground, start, updateBoard } = useChessground();
+
+onMounted(async () => {
+  initEngine().then(() => {
+    start();
+  });
 
   const onMove = (from: string, to: string) => {
     movePiece(from, to);

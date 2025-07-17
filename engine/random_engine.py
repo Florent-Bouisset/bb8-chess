@@ -1,7 +1,7 @@
 import chess
 import random
-from engine.base_engine import BaseEngine
-from engine.logger import log
+from .base_engine import BaseEngine
+from .logger import log
 
 
 class RandomEngine(BaseEngine):

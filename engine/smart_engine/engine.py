@@ -1,14 +1,37 @@
 import chess
-from engine.base_engine import BaseEngine
+from ..base_engine import BaseEngine
 from .move_selector import select_best_move
 from .position_evaluator import evaluate_position
-from engine.logger import log
+from ..logger import log
 
 
 class SmartEngine(BaseEngine):
     def __init__(self, debug=True):
         super().__init__(debug)
         self.board = chess.Board()
+
+    def handle_command(self, line):
+        if line == "uci":
+            self._respond("id name BB-8 smart-Engine")
+            self._respond("id author Florent Bouisset")
+            self._respond("uciok")
+
+        elif line == "isready":
+            self._respond("readyok")
+
+        elif line.startswith("position"):
+            self.set_position(line)
+
+        elif line.startswith("go"):
+            [move_uci, ponder_move_uci] = self.select_move()
+            # TO DO: the compute time, depth and so on are just hardcode value
+            self._respond(
+                f"info depth 5 seldepth 7 multipv 1 score cp -7 nodes 765 nps 109285 hashfull 0 tbhits 0 time 7 pv {move_uci}"
+            )
+            self._respond(f"bestmove {move_uci} ponder {ponder_move_uci}")
+
+        elif line == "quit":
+            return
 
     def run(self):
         while True:
@@ -18,28 +41,7 @@ class SmartEngine(BaseEngine):
                 break
 
             log("in", line)
-
-            if line == "uci":
-                self._respond("id name BB-8 smart-Engine")
-                self._respond("id author Florent Bouisset")
-                self._respond("uciok")
-
-            elif line == "isready":
-                self._respond("readyok")
-
-            elif line.startswith("position"):
-                self.set_position(line)
-
-            elif line.startswith("go"):
-                [move_uci, ponder_move_uci] = self.select_move()
-                # TO DO: the compute time, depth and so on are just hardcode value
-                self._respond(
-                    f"info depth 5 seldepth 7 multipv 1 score cp -7 nodes 765 nps 109285 hashfull 0 tbhits 0 time 7 pv {move_uci}"
-                )
-                self._respond(f"bestmove {move_uci} ponder {ponder_move_uci}")
-
-            elif line == "quit":
-                break
+            self.handle_command(line)
 
     def set_position(self, line):
         tokens = line.split()

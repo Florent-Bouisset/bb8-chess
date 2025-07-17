@@ -3,7 +3,7 @@ import time
 import chess
 from typing import List, Optional
 from typing import Tuple
-from engine.logger import log
+from ..logger import log
 
 
 def select_best_move(

@@ -67,9 +67,16 @@ poetry run dev
 Create a single executable binary for distribution:
 
 ```
-poetry run build_binary
+poetry run python scripts/build_binary.py smart
 ```
 The output binary will be in the dist/ folder, which you can use with any UCI-compatible chess GUI.
+
+### 5. Expose the engine to the web app
+
+````
+cp -R engine gui_client/public
+````
+
 
 
 ---

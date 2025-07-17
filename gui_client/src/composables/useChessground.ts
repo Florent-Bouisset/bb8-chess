@@ -20,7 +20,7 @@ export function useChessground() {
       movable: {
         free: false,
         color: "both",
-        dests: generateDests(),
+        dests: new Map(),
         events: {
           after: (from, to) => {
             moveHandler(from, to);
@@ -32,6 +32,13 @@ export function useChessground() {
     });
   }
 
+  function start() {
+    ground.set({
+      movable: {
+        dests: generateDests(),
+      },
+    });
+  }
   function updateBoard(chess: Chess) {
     ground.set({
       fen: chess.fen(),
@@ -47,5 +54,5 @@ export function useChessground() {
     ground.move(from, to); // update UI
   }
 
-  return { initChessground, updateBoard, moveOnBoard };
+  return { initChessground, start, updateBoard, moveOnBoard };
 }

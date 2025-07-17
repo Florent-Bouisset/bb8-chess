@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from engine.logger import log
+from .logger import log
 
 
 class BaseEngine(ABC):

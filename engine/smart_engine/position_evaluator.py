@@ -1,6 +1,6 @@
 import chess
 
-from engine.logger import log
+from ..logger import log
 
 
 def evaluate_position(board: chess.Board) -> float:

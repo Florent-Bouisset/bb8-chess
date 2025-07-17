@@ -1,15 +1,15 @@
-from engine.random_engine import RandomEngine
-from engine.smart_engine.engine import SmartEngine
+from .random_engine import RandomEngine
+from engine import SmartEngine
 
 import sys
 import traceback
 
 
 import sys
-from engine.logger import log
+from .logger import log
 
 
-def get_engine(name: str):
+def get_engine(name: str = "smart"):
     if name == "random":
         return RandomEngine()
     elif name == "smart":
@@ -21,13 +21,12 @@ def get_engine(name: str):
 def main(args=sys.argv):
     engine_name = sys.argv[1] if len(sys.argv) > 1 else "smart"
     engine = get_engine(engine_name)
+
     try:
         engine.run()
     except Exception as e:
         log_crash(engine, e)
         sys.exit(1)
-
-    engine.run()
 
 
 def log_crash(engine, exception):
