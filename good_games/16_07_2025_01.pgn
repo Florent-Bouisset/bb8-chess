@@ -1,0 +1,14 @@
+[Event "?"]
+[Site "?"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Player"]
+[Black "BB-8 smart-Engine"]
+[Result "1-0"]
+
+1. e4 e6 2. d4 a5 3. Nf3 Qe7 4. Bd3 g6 5. O-O Bh6 6. Bxh6 Nxh6 7. Qd2 Qf8
+8. c4 Ng8 9. Re1 Qb4 10. Nc3 b5 11. cxb5 Bb7 12. d5 Qf8 13. Bc4 exd5
+14. exd5+ Kd8 15. Qd4 f6 16. Re3 Qb4 17. Rae1 Ne7 18. Qxf6 Re8
+19. Ng5 Qxc4 20. Rxe7 c6 21. Rxe8+ Kc7 22. d6+ Kb6 23. Qd8+ Kc5
+24. Nge4+ Kb4 25. a3+ Kb3 26. Nd2+ Kxb2 27. Nxc4+ Kxc3 28. Nb6 cxb5
+29. Nxa8 Bxa8 30. Qxa5+ b4 31. Qxb4+ Kd3 32. R8e3+ Kc2 33. Qc3# 1-0
