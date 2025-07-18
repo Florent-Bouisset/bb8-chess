@@ -19,7 +19,7 @@ export function useChessground() {
       turnColor: getTurn(),
       movable: {
         free: false,
-        color: "both",
+        color: "white",
         dests: new Map(),
         events: {
           after: (from, to) => {
