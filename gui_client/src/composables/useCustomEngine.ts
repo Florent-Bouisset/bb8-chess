@@ -14,7 +14,6 @@ export function useCustomEngine() {
   addWorkerListener((event) => {
     console.log("[Worker][OUT]:", event.data);
   });
-  window.myworker = engine;
 
   function initEngine() {
     return new Promise((resolve, reject) => {
