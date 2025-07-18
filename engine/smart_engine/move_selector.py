@@ -7,7 +7,7 @@ from ..logger import log
 
 
 def select_best_move(
-    board: chess.Board, evaluate_position, depth: int = 4
+    board: chess.Board, evaluate_position, depth: int = 3
 ) -> Tuple[float, List]:
     """
     Checks all legal moves, applies them to a copy of the board,
