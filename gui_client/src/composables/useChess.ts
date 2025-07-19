@@ -34,5 +34,19 @@ export function useChess() {
     }
   }
 
-  return { chess, generateDests, shouldMoveBeAPromote, getTurn, movePiece };
+  function getLastMove(): [from: Square, to: Square] | undefined {
+    const lastMove = chess.history({ verbose: true }).at(-1);
+    if (lastMove) {
+      return [lastMove.from, lastMove.to];
+    }
+    return undefined;
+  }
+  return {
+    chess,
+    generateDests,
+    shouldMoveBeAPromote,
+    getLastMove,
+    getTurn,
+    movePiece,
+  };
 }

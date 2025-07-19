@@ -7,7 +7,7 @@ import type { Key } from "@lichess-org/chessground/types";
 export function useChessground() {
   let ground: Api;
 
-  const { generateDests, getTurn } = useChess();
+  const { generateDests, getTurn, getLastMove } = useChess();
 
   function initChessground(
     el: HTMLElement,
@@ -46,6 +46,7 @@ export function useChessground() {
   function updateBoard(chess: Chess) {
     ground.set({
       fen: chess.fen(),
+      lastMove: getLastMove(), // allow to highlight last move
       check: chess.inCheck(),
       turnColor: getTurn(),
       movable: {
