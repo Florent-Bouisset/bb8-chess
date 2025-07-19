@@ -36,11 +36,19 @@ export function useCustomEngine() {
     });
   }
 
-  function onBestMove(callback: (from: string, to: string) => void) {
+  function onBestMove(
+    callback: (from: string, to: string, promotion: string | undefined) => void
+  ) {
     addWorkerListener((event) => {
-      const move = event.data.match(/^bestmove\s([a-h][1-8])([a-h][1-8])/);
+      const move = event.data.match(
+        /^bestmove\s([a-h][1-8])([a-h][1-8])([qrbn])?/
+      );
       if (move) {
-        callback(move[1], move[2]);
+        const from = move[1];
+        const to = move[2];
+        const promotion = move[3]; // could be undefined
+
+        callback(from, to, promotion);
       }
     });
   }

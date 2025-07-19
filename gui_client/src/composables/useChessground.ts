@@ -12,7 +12,11 @@ export function useChessground() {
   function initChessground(
     el: HTMLElement,
     chess: Chess,
-    moveHandler: (from: string, to: string) => void
+    moveHandler: (
+      from: string,
+      to: string,
+      promotion: string | undefined
+    ) => void
   ) {
     ground = Chessground(el, {
       fen: chess.fen(),
@@ -23,7 +27,7 @@ export function useChessground() {
         dests: new Map(),
         events: {
           after: (from, to) => {
-            moveHandler(from, to);
+            moveHandler(from, to, undefined);
           },
         },
       },
