@@ -23,7 +23,6 @@ const visible = ref(true);
 const types = ["queen", "rook", "bishop", "knight"];
 
 function choose(type: string) {
-  console.log("on click piece");
   visible.value = false;
   const map: Record<string, string> = {
     queen: "q",
