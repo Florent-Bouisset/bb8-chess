@@ -5,6 +5,10 @@ from typing import List, Optional
 from typing import Tuple
 from ..logger import log
 
+from .transposition_table import TranspositionTable
+
+transposition_table = TranspositionTable()
+
 
 def select_best_move(
     board: chess.Board, evaluate_position, depth: int = 3
@@ -61,6 +65,11 @@ def evaluate_with_depth(
 ) -> Tuple[float, List[chess.Move]]:
     global nodes_searched
     nodes_searched += 1
+    key = board._transposition_key()
+
+    result = transposition_table.lookup(key, depth)
+    if result is not None:
+        return result
 
     if depth == 0 or board.is_game_over():
         return evaluate_position(board), []
@@ -71,6 +80,9 @@ def evaluate_with_depth(
     for move in board.legal_moves:
         board.push(move)
         score, line = evaluate_with_depth(board, depth - 1, evaluate_position)
+
+        key = board._transposition_key()
+        transposition_table.store(key, score, depth - 1, line)
         # Négation du score parce qu'on change de joueur
         score = -score
         board.pop()
