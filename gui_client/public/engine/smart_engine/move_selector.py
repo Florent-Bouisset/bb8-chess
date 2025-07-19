@@ -47,7 +47,11 @@ def select_best_move(
     elapsed = end_time - start_time
     log(
         "INFO",
-        f"Positions evaluated : {nodes_searched}, Time Elapsed : {elapsed:.2f} seconds, Positions par seconde (NPS) : {nodes_searched / elapsed:.2f}",
+        (
+            f"Positions evaluated : {nodes_searched}, Time Elapsed : {elapsed:.2f} seconds, Positions par seconde (NPS) : {nodes_searched / elapsed:.2f}"
+            if elapsed > 0
+            else "NPS: ∞"
+        ),
     )
     return best_move, best_score
 
