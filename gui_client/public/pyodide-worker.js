@@ -27,6 +27,7 @@ async function loadPyodideAndPackages() {
     "smart_engine/__init__.py",
     "smart_engine/engine.py",
     "smart_engine/move_selector.py",
+    "smart_engine/transposition_table.py",
     "main.py",
   ];
 
